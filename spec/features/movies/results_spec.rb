@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe "Movie Results", type: :feature do
   it 'displays top 20 rated movies', :vcr do
-    user = User.create!(name: "Tim", email: "Tim@mail.com")
+    user = User.create!(name: "Tim", email: "Tim@mail.com", username: "BubbaGump", password: "passpass")
     visit "/users/#{user.id}/movies?q=top%20rated"
 
     # json_response = File.read('spec/fixtures/top_20_movies.json')
@@ -26,7 +26,7 @@ RSpec.describe "Movie Results", type: :feature do
   end
 
   it 'has links to movie detail page', :vcr do
-    user = User.create!(name: "Tim", email: "Tim@mail.com")
+    user = User.create!(name: "Tim", email: "Tim@mail.com", username: "BubbaGump", password: "passpass")
     visit "/users/#{user.id}/movies?q=top%20rated"
     click_link "Shawshank Redemption"
 
@@ -36,10 +36,10 @@ RSpec.describe "Movie Results", type: :feature do
 
 
   it 'has a button to return to the discover page', :vcr do
-    user = User.create!(name: "Tim", email: "Tim@mail.com")
+    user = User.create!(name: "Tim", email: "Tim@mail.com", username: "BubbaGump", password: "passpass")
     movie = Movie.new(id: 1, title: "Movie", vote_average: "8.2")
     visit "/users/#{user.id}/movies?q=top%20rated"
-    
+
     click_on "Return to Discover"
     expect(current_path).to eq("/users/#{user.id}/discover")
   end
