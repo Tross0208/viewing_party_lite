@@ -43,12 +43,52 @@ RSpec.describe "New User", type: :feature do
 
     User.create!(name: "Tim", email: "Jim@mail.com", username: "BubbaGump", password: "passpass")
 
+    username = "funbucket13"
+    password = "test"
     fill_in(:name, with: "Jim")
     fill_in(:email, with: "Jim@mail.com")
+    fill_in :username, with: username
+    fill_in :password, with: password
+    fill_in :password_confirmation, with: password
     click_on "Register"
 
     expect(current_path).to eq("/users/register")
     expect(page).to have_content("Error: User already exists with this email")
+  end
+
+  it 'rejects new user with no name' do
+    visit "/users/register"
+
+
+    fill_in(:email, with: "Jim@mail.com")
+    username = "funbucket13"
+    password = "test"
+
+    fill_in :username, with: username
+    fill_in :password, with: password
+    fill_in :password_confirmation, with: password
+    click_on "Register"
+
+    expect(current_path).to eq("/users/register")
+    expect(page).to have_content("Error: Please Enter Your Name")
+
+  end
+
+  it 'rejects new user with no username' do
+    visit "/users/register"
+
+    fill_in(:name, with: "Jim")
+    fill_in(:email, with: "Jim@mail.com")
+    username = ""
+    password = "test"
+
+    fill_in :username, with: username
+    fill_in :password, with: password
+    fill_in :password_confirmation, with: password
+    click_on "Register"
+
+    expect(current_path).to eq("/users/register")
+    expect(page).to have_content("Error: Please Enter A Username")
   end
 
 end

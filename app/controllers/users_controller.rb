@@ -15,6 +15,12 @@ class UsersController < ApplicationController
       elsif !(params[:password]==params[:password_confirmation])
         redirect_to "/users/register"
         flash[:notice] = "Error: Passwords do not match"
+      elsif params[:username].length == 0
+        redirect_to "/users/register"
+        flash[:notice] = "Error: Please Enter A Username"
+      elsif params[:name].length == 0
+        redirect_to "/users/register"
+        flash[:notice] = "Error: Please Enter Your Name"
       else
         redirect_to "/users/register"
         flash[:notice] = "Error: User already exists with this email"
