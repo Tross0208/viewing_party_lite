@@ -15,9 +15,9 @@ RSpec.describe "Home page", type: :feature do
   end
 
   it 'lists all existing users' do
-    user1 = User.create!(name: "Susan", email: "susan@mail.com")
-    user2 = User.create!(name: "Tyler", email: "tyler@mail.com")
-    user3 = User.create!(name: "Sherman", email: "sherman@mail.com")
+    user1 = User.create!(name: "Susan", email: "susan@mail.com", username: "BubbaGump", password: "passpass")
+    user2 = User.create!(name: "Tyler", email: "tyler@mail.com", username: "BubbaGump2", password: "passpass")
+    user3 = User.create!(name: "Sherman", email: "sherman@mail.com", username: "BubbaGump3", password: "passpass")
 
     User.all.each do |user|
       visit "/"

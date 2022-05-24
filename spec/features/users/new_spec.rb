@@ -6,6 +6,11 @@ RSpec.describe "New User", type: :feature do
 
     fill_in(:name, with: "Jim")
     fill_in(:email, with: "Jim@mail.com")
+    username = "funbucket13"
+    password = "test"
+
+    fill_in :username, with: username
+    fill_in :password, with: password
     click_on "Register"
     new_user = User.last
 
@@ -15,7 +20,7 @@ RSpec.describe "New User", type: :feature do
   it 'rejects duplicate emails' do
     visit "/users/register"
 
-    User.create!(name: "Tim", email: "Jim@mail.com")
+    User.create!(name: "Tim", email: "Jim@mail.com", username: "BubbaGump", password: "passpass")
 
     fill_in(:name, with: "Jim")
     fill_in(:email, with: "Jim@mail.com")
