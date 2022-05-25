@@ -23,7 +23,7 @@ RSpec.describe "Home page", type: :feature do
       visit "/"
       expect(page).to have_content(user.name)
       click_link("#{user.name}")
-      expect(current_path).to eq("/users/#{user.id}")
+      expect(current_path).to eq("/users/dashboard")
     end
   end
 

@@ -20,7 +20,7 @@ class PartiesController < ApplicationController
             PartyUser.create(user: u, party: new_party, host: false)
           end
         end
-        redirect_to "/users/#{params[:user_id]}"
+        redirect_to "/users/dashboard"
       else
         render :new
       end
