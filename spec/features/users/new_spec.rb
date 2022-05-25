@@ -15,7 +15,7 @@ RSpec.describe "New User", type: :feature do
     click_on "Register"
     new_user = User.last
 
-    expect(current_path).to eq("/users/#{new_user.id}")
+    expect(current_path).to eq("/users/dashboard")
     expect(page).to have_content("Welcome, #{new_user.username}!")
   end
 

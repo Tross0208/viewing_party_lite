@@ -3,15 +3,17 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    binding.pry
+    @user = User.find(session[:user_id])
   end
 
   def create
-    #binding.pry
+
     user = User.new(user_params)
       if user.save && (params[:password]==params[:password_confirmation])
+        session[:user_id] = user.id
         flash[:success] = "Welcome, #{user.username}!"
-        redirect_to "/users/#{user.id}"
+        redirect_to "/users/dashboard"
       elsif !(params[:password]==params[:password_confirmation])
         redirect_to "/users/register"
         flash[:notice] = "Error: Passwords do not match"
@@ -24,7 +26,6 @@ class UsersController < ApplicationController
       else
         redirect_to "/users/register"
         flash[:notice] = "Error: User already exists with this email"
-
       end
   end
 

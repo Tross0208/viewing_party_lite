@@ -4,8 +4,8 @@ RSpec.describe "User Dashboard/Show Page", type: :feature do
   it 'has the users info' do
     user1 = User.create!(name: "Amy", email: 'amy@mail.com', username: "BubbaGump", password: "passpass")
     user2 = User.create!(name: "James", email: 'james@mail.com', username: "BubbaGump2", password: "passpass")
-
-    visit "/users/#{user1.id}"
+    #tried commenting out second user, visit. Still no session available
+    visit "/users/dashboard"
 
     expect(page).to have_content("Amy's Dashboard")
     expect(page).not_to  have_content("James's Dashboard")
@@ -17,7 +17,7 @@ RSpec.describe "User Dashboard/Show Page", type: :feature do
     user1 = User.create!(name: "Amy", email: 'amy@mail.com', username: "BubbaGump", password: "passpass")
     user2 = User.create!(name: "James", email: 'james@mail.com', username: "BubbaGump2", password: "passpass")
 
-    visit "/users/#{user1.id}"
+    visit "/users/dashboard"
 
     click_on "Discover Movies"
     expect(current_path).to eq("/users/#{user1.id}/discover")
@@ -40,7 +40,7 @@ RSpec.describe "User Dashboard/Show Page", type: :feature do
     party_user_5 = PartyUser.create!(party: party_3, user: user_2, host: true)
     party_user_6 = PartyUser.create!(party: party_3, user: user_1, host: false)
 
-    visit "/users/#{user_1.id}"
+    visit "/users/dashboard"
 
     within ".invited_to" do
       expect(page).to have_link("Shawshank Redemption")
@@ -54,7 +54,7 @@ RSpec.describe "User Dashboard/Show Page", type: :feature do
       expect(page).not_to have_link("Schindler's List")
     end
 
-    visit "/users/#{user_2.id}"
+    visit "/users/dashboard"
     within ".invited_to" do
       expect(page).to have_link("The Godfather")
       expect(page).not_to have_link("Shawshank Redemption")
